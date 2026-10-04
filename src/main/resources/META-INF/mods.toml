@@ -8,12 +8,6 @@ issueTrackerURL="https://github.com/loot-addict-gh/Cuffed-Addon/issues"
 [[mixins]]
     config="mixins.cuffedaddon.json"
 
-# Declared here as well as in build.gradle's jar manifest. Forge reads mixin
-# configs from both, and Mixin ignores a config it has already registered, so
-# listing it twice is harmless - while listing it in only the manifest meant a
-# single missing line in a build file silently disabled the whole Fake Players
-# feature with no error anywhere, which is what happened at 1.5.0. The
-# build.gradle MixinConfigs entry can now be removed or left alone; either works.
 [[mixins]]
     config="mixins.cuffedaddon.fakeplayer.json"
 
