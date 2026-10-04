@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,half=lower,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_bottom"
+    },
+    "facing=north,half=lower,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_bottom"
+    },
+    "facing=north,half=upper,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_top"
+    },
+    "facing=north,half=upper,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_top"
+    },
+    "facing=south,half=lower,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_bottom",
+      "y": 180
+    },
+    "facing=south,half=lower,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_bottom",
+      "y": 180
+    },
+    "facing=south,half=upper,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_top",
+      "y": 180
+    },
+    "facing=south,half=upper,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_top",
+      "y": 180
+    },
+    "facing=west,half=lower,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_bottom",
+      "y": 270
+    },
+    "facing=west,half=lower,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_bottom",
+      "y": 270
+    },
+    "facing=west,half=upper,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_top",
+      "y": 270
+    },
+    "facing=west,half=upper,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_top",
+      "y": 270
+    },
+    "facing=east,half=lower,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_bottom",
+      "y": 90
+    },
+    "facing=east,half=lower,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_bottom",
+      "y": 90
+    },
+    "facing=east,half=upper,occupied=true": {
+      "model": "cuffedaddon:block/wall_restraint_top",
+      "y": 90
+    },
+    "facing=east,half=upper,occupied=false": {
+      "model": "cuffedaddon:block/wall_restraint_top",
+      "y": 90
+    }
+  }
+}

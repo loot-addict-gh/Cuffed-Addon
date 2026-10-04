@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "RRR",
+    " H "
+  ],
+  "key": {
+    "H": {
+      "item": "cuffed:handcuffs"
+    },
+    "R": {
+      "item": "cuffedaddon:rope"
+    }
+  },
+  "result": {
+    "item": "cuffedaddon:bed_restraint",
+    "count": 1
+  }
+}

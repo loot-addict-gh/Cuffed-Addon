@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cuffedaddon:bunk_purple"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "block": "cuffedaddon:bunk_purple",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "part": "head"
+          }
+        }
+      ]
+    }
+  ]
+}

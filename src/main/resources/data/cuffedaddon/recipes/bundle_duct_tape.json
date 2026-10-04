@@ -1,0 +1,7 @@
+{
+  "type": "cuffedaddon:combination_restraint",
+  "vision_item": "minecraft:bundle",
+  "vision_item_must_be_empty_bundle": true,
+  "speech_item": "cuffed:duck_tape",
+  "result": "cuffedaddon:bundle_duct_tape"
+}

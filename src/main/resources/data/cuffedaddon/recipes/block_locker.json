@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "RPR",
+    " R "
+  ],
+  "key": {
+    "R": { "item": "cuffed:reinforced_stone" },
+    "P": { "item": "cuffed:padlock" }
+  },
+  "result": {
+    "item": "cuffedaddon:block_locker",
+    "count": 1
+  }
+}

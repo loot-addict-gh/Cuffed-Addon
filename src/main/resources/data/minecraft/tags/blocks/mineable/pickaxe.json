@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "cuffedaddon:bunk_white",
+    "cuffedaddon:bunk_orange",
+    "cuffedaddon:bunk_magenta",
+    "cuffedaddon:bunk_light_blue",
+    "cuffedaddon:bunk_yellow",
+    "cuffedaddon:bunk_lime",
+    "cuffedaddon:bunk_pink",
+    "cuffedaddon:bunk_gray",
+    "cuffedaddon:bunk_light_gray",
+    "cuffedaddon:bunk_cyan",
+    "cuffedaddon:bunk_purple",
+    "cuffedaddon:bunk_blue",
+    "cuffedaddon:bunk_brown",
+    "cuffedaddon:bunk_green",
+    "cuffedaddon:bunk_red",
+    "cuffedaddon:bunk_black"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "part=head,facing=north": {
+      "model": "cuffedaddon:block/bunk_light_blue_left",
+      "y": 270
+    },
+    "part=head,facing=east": {
+      "model": "cuffedaddon:block/bunk_light_blue_left"
+    },
+    "part=head,facing=south": {
+      "model": "cuffedaddon:block/bunk_light_blue_left",
+      "y": 90
+    },
+    "part=head,facing=west": {
+      "model": "cuffedaddon:block/bunk_light_blue_left",
+      "y": 180
+    },
+    "part=foot,facing=north": {
+      "model": "cuffedaddon:block/bunk_light_blue_right",
+      "y": 270
+    },
+    "part=foot,facing=east": {
+      "model": "cuffedaddon:block/bunk_light_blue_right"
+    },
+    "part=foot,facing=south": {
+      "model": "cuffedaddon:block/bunk_light_blue_right",
+      "y": 90
+    },
+    "part=foot,facing=west": {
+      "model": "cuffedaddon:block/bunk_light_blue_right",
+      "y": 180
+    }
+  }
+}

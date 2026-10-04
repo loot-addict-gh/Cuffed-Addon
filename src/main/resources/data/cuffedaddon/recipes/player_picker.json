@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "CEC",
+    " P "
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "C": {
+      "item": "cuffed:handcuffs"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "P": {
+      "item": "cuffed:possessions_box"
+    }
+  },
+  "result": {
+    "item": "cuffedaddon:player_picker",
+    "count": 1
+  }
+}

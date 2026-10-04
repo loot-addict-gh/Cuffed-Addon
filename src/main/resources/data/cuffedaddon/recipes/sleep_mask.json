@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RWR"
+  ],
+  "key": {
+    "R": { "item": "cuffedaddon:rope" },
+    "W": { "tag": "minecraft:wool" }
+  },
+  "result": {
+    "item": "cuffedaddon:sleep_mask",
+    "count": 1
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cuffedaddon:item/shock_collar"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "cuffedaddon:bound": 1
+      },
+      "model": "cuffedaddon:item/shock_collar_bound"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GPL-3.0-only"
+
+# FILL THESE IN BEFORE THE CURSEFORGE UPLOAD.
+# GPL-3.0 requires the source of a distributed binary to be available, so
+# displayURL should point at a public repository (or a page linking to one).
+# Leave a line commented out rather than setting it to "" - an empty string
+# renders as a dead link on the mod-list screen.
+#displayURL="https://github.com/<you>/cuffedaddon"
+#issueTrackerURL="https://github.com/<you>/cuffedaddon/issues"
+
+[[mixins]]
+    config="mixins.cuffedaddon.json"
+
+# Declared here as well as in build.gradle's jar manifest. Forge reads mixin
+# configs from both, and Mixin ignores a config it has already registered, so
+# listing it twice is harmless - while listing it in only the manifest meant a
+# single missing line in a build file silently disabled the whole Fake Players
+# feature with no error anywhere, which is what happened at 1.5.0. The
+# build.gradle MixinConfigs entry can now be removed or left alone; either works.
+[[mixins]]
+    config="mixins.cuffedaddon.fakeplayer.json"
+
+[[mods]]
+modId="cuffedaddon"
+version="1.6.4"
+displayName="Cuffed Addon"
+authors="loot_addict"
+credits='''Built on Cuffed by LazrProductions, used under GPL-3.0 - https://github.com/LazrProductions/cuffed
+Includes modified Cuffed code and artwork; the changed files are listed in README.md.
+Optional integrations: Curios API (TheIllusiveC4) and Fake Players (duzo).
+Some textures are modified from Minecraft's own assets. Not an official Minecraft product; not approved by or associated with Mojang or Microsoft.'''
+description='''Multiple additions to the original mod. Rope, sleep mask, bed restraint, resource packs, and more!'''
+
+[[dependencies.cuffedaddon]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.cuffedaddon]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.20.2)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.cuffedaddon]]
+    modId="cuffed"
+    mandatory=true
+    versionRange="[1.3.15,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.cuffedaddon]]
+    modId="curios"
+    mandatory=false
+    versionRange="[5.14.1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.cuffedaddon]]
+    modId="players"
+    mandatory=false
+    versionRange="[2.2.0,)"
+    ordering="AFTER"
+    side="BOTH"

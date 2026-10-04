@@ -1,0 +1,9 @@
+{
+    "item.cuffed.duck_tape": "Duct Tape",
+    "info.cuffed.restraints.duck_tape_head.name": "Duct Tape",
+    "info.cuffed.restraints.duck_tape_head.action_bar": "Your mouth is taped by Duct Tape!",
+    "info.cuffed.restraints.duck_tape_arms.name": "Duct Tape",
+    "info.cuffed.restraints.duck_tape_arms.action_bar": "Your arms are bound by Duct Tape!",
+    "info.cuffed.restraints.duck_tape_legs.name": "Duct Tape",
+    "info.cuffed.restraints.duck_tape_legs.action_bar": "Your legs are bound by Duct Tape!"
+}

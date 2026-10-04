@@ -1,0 +1,7 @@
+{
+  "__comment": "Flat 2D inventory icon (item/generated) - its OWN dedicated texture (textures/item/wall_restraint.png), independent of the block's red/blue top/bottom textures, so it can be designed as its own icon rather than reusing a stretched block face.",
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "cuffedaddon:item/wall_restraint"
+  }
+}

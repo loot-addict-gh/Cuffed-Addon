@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "III",
+    " H "
+  ],
+  "key": {
+    "H": {
+      "item": "cuffed:handcuffs"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "cuffedaddon:wall_restraint",
+    "count": 1
+  }
+}

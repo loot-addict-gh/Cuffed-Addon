@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WL",
+    "LH"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:white_dye"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "H": {
+      "item": "cuffed:handcuffs"
+    }
+  },
+  "result": {
+    "item": "cuffedaddon:straitjacket",
+    "count": 1
+  }
+}

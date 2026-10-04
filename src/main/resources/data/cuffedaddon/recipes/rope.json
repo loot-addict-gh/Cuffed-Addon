@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:string" },
+    { "item": "minecraft:string" },
+    { "item": "minecraft:string" },
+    { "item": "minecraft:leather" }
+  ],
+  "result": {
+    "item": "cuffedaddon:rope",
+    "count": 4
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "IBI"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:black_bed"
+    }
+  },
+  "result": {
+    "item": "cuffedaddon:bunk_black",
+    "count": 1
+  }
+}

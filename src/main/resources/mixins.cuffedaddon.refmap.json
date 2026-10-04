@@ -1,0 +1,35 @@
+{
+  "mappings": {
+    "com/example/cuffedaddon/mixin/HumanoidModelLiePoseMixin": {
+      "setupAnim": "Lnet/minecraft/client/model/HumanoidModel;m_6973_(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V"
+    },
+    "com/example/cuffedaddon/mixin/LivingEntityRendererLiePoseMixin": {
+      "setupRotations": "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;m_7523_(Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;FFF)V"
+    },
+    "com/example/cuffedaddon/mixin/CameraLiePoseMixin": {
+      "setup": "Lnet/minecraft/client/Camera;m_90575_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V"
+    },
+    "com/example/cuffedaddon/mixin/PlayerRendererLiePoseMixin": {
+      "getRenderOffset": "Lnet/minecraft/client/renderer/entity/player/PlayerRenderer;m_7860_(Lnet/minecraft/client/player/AbstractClientPlayer;F)Lnet/minecraft/world/phys/Vec3;"
+    },
+    "com/example/cuffedaddon/mixin/EntityPushableLiePoseMixin": {
+      "isPushable": "Lnet/minecraft/world/entity/Entity;m_6094_()Z"
+    },
+    "com/example/cuffedaddon/mixin/HumanoidModelWallPoseMixin": {
+      "setupAnim": "Lnet/minecraft/client/model/HumanoidModel;m_6973_(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V"
+    },
+    "com/example/cuffedaddon/mixin/EntityPushableWallPoseMixin": {
+      "isPushable": "Lnet/minecraft/world/entity/Entity;m_6094_()Z"
+    },
+    "com/example/cuffedaddon/mixin/FakePlayerArmPoseMixin": {
+      "setupAnim": "Lnet/minecraft/client/model/HumanoidModel;m_6973_(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V"
+    },
+    "com/example/cuffedaddon/mixin/HumanoidModelIllusionLegsMixin": {
+      "setupAnim": "Lnet/minecraft/client/model/HumanoidModel;m_6973_(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V"
+    },
+    "com/example/cuffedaddon/mixin/MouseHandlerIllusionScrollMixin": {
+      "onScroll": "Lnet/minecraft/client/MouseHandler;m_91526_(JDD)V"
+    }
+  },
+  "data": {}
+}

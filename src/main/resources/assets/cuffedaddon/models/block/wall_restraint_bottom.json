@@ -1,0 +1,137 @@
+{
+  "__comment": "LOWER half. Rebuilt from scratch with the simplest possible mapping - plain, unmirrored UV on every face, north and south identical, no manual flips anywhere. Only technique kept: west/east/down clamped to a single edge pixel (column for west/east, row for down) on the bottom 3px Y-band, which touches open air (the global bottom of the whole 2-tall structure). Top 3px Y-band is the seam against the UPPER half - no side/cap geometry there. Middle 10px Y-band is front/back only. Single texture regardless of OCCUPIED (that property still exists for gameplay logic only).",
+  "ambientocclusion": false,
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "particle": "cuffedaddon:block/wall_restraint_bottom",
+    "all": "cuffedaddon:block/wall_restraint_bottom"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        13
+      ],
+      "to": [
+        16,
+        3,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            13,
+            16,
+            16
+          ],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [
+            0,
+            13,
+            16,
+            16
+          ],
+          "texture": "#all",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            15,
+            13,
+            16,
+            16
+          ],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [
+            0,
+            13,
+            1,
+            16
+          ],
+          "texture": "#all"
+        },
+        "down": {
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ],
+          "texture": "#all"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        3,
+        13
+      ],
+      "to": [
+        16,
+        13,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            3,
+            16,
+            13
+          ],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [
+            0,
+            3,
+            16,
+            13
+          ],
+          "texture": "#all",
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        13,
+        13
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ],
+          "texture": "#all",
+          "cullface": "south"
+        }
+      }
+    }
+  ]
+}

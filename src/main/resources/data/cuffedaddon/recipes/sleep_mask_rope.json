@@ -1,0 +1,7 @@
+{
+  "type": "cuffedaddon:combination_restraint",
+  "vision_item": "cuffedaddon:sleep_mask",
+  "vision_item_must_be_empty_bundle": false,
+  "speech_item": "cuffedaddon:rope",
+  "result": "cuffedaddon:sleep_mask_rope"
+}
