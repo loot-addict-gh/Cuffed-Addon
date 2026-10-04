@@ -13,7 +13,7 @@ issueTrackerURL="https://github.com/loot-addict-gh/Cuffed-Addon/issues"
 
 [[mods]]
 modId="cuffedaddon"
-version="1.6.4"
+version="1.0.0"
 displayName="Cuffed Addon"
 authors="loot_addict"
 credits='''Built on Cuffed by LazrProductions, used under GPL-3.0 - https://github.com/LazrProductions/cuffed
