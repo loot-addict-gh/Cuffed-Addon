@@ -2,13 +2,8 @@ modLoader="javafml"
 loaderVersion="[47,)"
 license="GPL-3.0-only"
 
-# FILL THESE IN BEFORE THE CURSEFORGE UPLOAD.
-# GPL-3.0 requires the source of a distributed binary to be available, so
-# displayURL should point at a public repository (or a page linking to one).
-# Leave a line commented out rather than setting it to "" - an empty string
-# renders as a dead link on the mod-list screen.
-#displayURL="https://github.com/<you>/cuffedaddon"
-#issueTrackerURL="https://github.com/<you>/cuffedaddon/issues"
+displayURL="https://github.com/loot-addict-gh/Cuffed-Addon"
+issueTrackerURL="https://github.com/loot-addict-gh/Cuffed-Addon/issues"
 
 [[mixins]]
     config="mixins.cuffedaddon.json"
