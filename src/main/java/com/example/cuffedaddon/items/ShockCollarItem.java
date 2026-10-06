@@ -1,6 +1,5 @@
 package com.example.cuffedaddon.items;
 
-import com.example.cuffedaddon.client.ClientCollaredState;
 import com.example.cuffedaddon.collar.RevokedBindingsSavedData;
 import com.example.cuffedaddon.collar.ShockCollarUtil;
 import com.example.cuffedaddon.init.ModItems;
@@ -31,13 +30,28 @@ import java.util.UUID;
  *
  * <ul>
  *   <li><b>Unbound</b> (freshly crafted from Unbound Collar + Remote): its own
- *       texture, its own name "Shock Collar". Right-clicking a player puts the
- *       collar on them; crouch + right-click with nothing targeted puts it on
- *       yourself.</li>
+ *       texture, its own name "Shock Collar". Right-click a player to put the
+ *       collar on them; LEFT-click to put it on yourself.</li>
  *   <li><b>Bound</b> (after being applied): the SAME item stack, now acting as
  *       that collaring's remote. Swaps to the Remote's texture and renames to
- *       the wearer's username in italics. Right-click (held) shocks them.</li>
+ *       the wearer's username in italics. Right-click (held) shocks the wearer;
+ *       crouch + right-click them to take the collar off them; crouch +
+ *       LEFT-click to take your OWN collar off.</li>
  * </ul>
+ *
+ * <h2>1.6.5 moved both self gestures from right click to LEFT click</h2>
+ * [stated] asked for the collar to follow the same control scheme as every
+ * Cuffed restraint - right click acts on another player, left click acts on
+ * yourself - so {@code Item#use} no longer has a crouch branch at all. Both
+ * left-click gestures live in {@code interact.SelfGestureEvents}, which reads
+ * the arm swing exactly as Cuffed's own self-restraining does; read that class
+ * for the mechanism and for the arms gate they share.
+ *
+ * <p><b>One deliberate consequence: crouch + right-click on a bound remote now
+ * SHOCKS rather than self-removing.</b> The crouch used to be the self-removal
+ * gesture, which cost the ability to shock while sneaking (accepted at the
+ * time). With self-removal moved to crouch + left click, the remote simply
+ * fires whether or not you are crouching, and crouch-self-shock is back.
  *
  * Removing the collar with its own bound remote reverts the stack to the
  * unbound state - default texture, default name - so it's immediately reusable
@@ -116,63 +130,18 @@ public class ShockCollarItem extends Item {
             @Nonnull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (isBound(stack)) {
-            // Crouch + right-click with nothing targeted takes YOUR OWN collar
-            // off. This mirrors the self-application rule below, and exists
-            // because removal otherwise runs only through
-            // PlayerInteractEvent.EntityInteract - an event you can never fire
-            // on yourself, which left a self-collared player with no way out
-            // but struggling. [stated] confirmed losing crouch-self-shock for
-            // this is fine.
-            //
-            // It only fires when the crouching player is the wearer of THIS
-            // remote's collar; removeCollar checks the binding. Crouching with
-            // someone else's remote falls through and shocks as normal.
-            if (player.isShiftKeyDown() && tryCrouchRemove(level, player, stack)) {
-                return InteractionResultHolder.success(stack);
-            }
-
-            // Start (or continue) shocking. The actual effect application is
-            // server-side in onUseTick; starting the use on both sides keeps
-            // the client's own "item in use" state in sync.
-            player.startUsingItem(hand);
-            return InteractionResultHolder.consume(stack);
-        }
-
-        // Unbound: self-application. [stated]: "or to yourself if crouching +
-        // right click + not looking at another player". The "not looking at
-        // another player" half is already guaranteed by vanilla - targeting an
-        // entity routes the click to the EntityInteract path instead and
-        // Item#use never runs - so only the crouch needs checking here.
-        if (!player.isShiftKeyDown()) {
+        if (!isBound(stack)) {
+            // Unbound collar, right-clicked at nothing in particular: nothing
+            // to do. Both SELF gestures moved to LEFT click at 1.6.5 - see this
+            // class's doc and interact.SelfGestureEvents.
             return InteractionResultHolder.pass(stack);
         }
-        if (level.isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
-            return InteractionResultHolder.success(stack);
-        }
-        if (ShockCollarUtil.applyCollar(serverPlayer, serverPlayer, stack)) {
-            return InteractionResultHolder.success(stack);
-        }
-        return InteractionResultHolder.fail(stack);
-    }
 
-    /**
-     * The self-removal branch, split out because the two sides answer it
-     * differently.
-     *
-     * <p>The server does the real work. The client can't - it never learns which
-     * binding its own collar carries, only whether it is collared at all - so it
-     * answers with that instead. Getting the client's answer roughly right
-     * matters because the alternative branch calls {@code startUsingItem}, and a
-     * client that starts "using" an item the server didn't sits at ~20% walk
-     * speed until the button is released.
-     */
-    private static boolean tryCrouchRemove(Level level, Player player, ItemStack stack) {
-        if (level.isClientSide()) {
-            return ClientCollaredState.isCollared();
-        }
-        return player instanceof ServerPlayer serverPlayer
-                && ShockCollarUtil.removeCollar(serverPlayer, stack);
+        // Bound remote: start (or continue) shocking, crouching or not. The
+        // effect itself is applied server-side in onUseTick; starting the use on
+        // both sides keeps the client's own "item in use" state in step.
+        player.startUsingItem(hand);
+        return InteractionResultHolder.consume(stack);
     }
 
     @Override
@@ -291,15 +260,31 @@ public class ShockCollarItem extends Item {
         return isBound(stack);
     }
 
+    /**
+     * One line either way.
+     *
+     * <p>UNBOUND uses Cuffed's own "removed with" SHAPE - a grey label, then the
+     * method in white - with both halves on our own keys: the label because
+     * Cuffed's spells it "Restriant" (see {@code KeyNecklaceItem}), and the value
+     * because the thing that takes a collar off is the bound remote the collar
+     * becomes, which Cuffed has no key for.
+     *
+     * <p>BOUND says only how to fire it. A remote is not a restraint you are
+     * holding, so the "removed with" line would be answering a question nobody
+     * asked of that stack.
+     */
     @Override
     public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level level,
             @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flag) {
         if (isBound(stack)) {
-            tooltip.add(Component.translatable("item.cuffedaddon.shock_collar.tooltip.bound")
+            tooltip.add(Component.translatable("item.cuffedaddon.shock_collar.tooltip.shock")
                     .withStyle(net.minecraft.ChatFormatting.GRAY));
-        } else {
-            tooltip.add(Component.translatable("item.cuffedaddon.shock_collar.tooltip.unbound")
-                    .withStyle(net.minecraft.ChatFormatting.GRAY));
+            return;
         }
+        tooltip.add(Component.translatable("info.cuffedaddon.removed_with")
+                .withStyle(net.minecraft.ChatFormatting.GRAY)
+                .append(" ")
+                .append(Component.translatable("info.cuffedaddon.bound_remote")
+                        .withStyle(net.minecraft.ChatFormatting.WHITE)));
     }
 }

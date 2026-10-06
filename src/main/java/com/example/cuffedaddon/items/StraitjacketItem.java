@@ -32,7 +32,7 @@ public class StraitjacketItem extends AbstractRestraintItem {
         components.add(Component.translatable("info.cuffed.restraint_type.arm").withStyle(ChatFormatting.GRAY));
         components.add(Component.translatable("info.cuffed.restraint_type.leg").withStyle(ChatFormatting.GRAY));
         components.add(Component.empty());
-        components.add(Component.translatable("info.cuffed.restraint_type.my_key").withStyle(ChatFormatting.GRAY)
+        components.add(Component.translatable("info.cuffedaddon.removed_with").withStyle(ChatFormatting.GRAY)
                 .append(" ")
                 .append(Component.translatable("info.cuffed.empty_hand").withStyle(ChatFormatting.WHITE)));
         super.appendHoverText(stack, level, components, tooltipFlag);

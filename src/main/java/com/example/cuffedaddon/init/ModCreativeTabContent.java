@@ -103,6 +103,10 @@ public class ModCreativeTabContent {
         accept(event, ModItems.UNBOUND_COLLAR);
         accept(event, ModItems.SHOCK_REMOTE);
         accept(event, ModItems.SHOCK_COLLAR);
+        // Key Necklace (1.6.5), right after the collar line - the other neck
+        // item, and the closest thing in the tab to it. Say if a different
+        // spot is wanted.
+        accept(event, ModItems.KEY_NECKLACE);
         // Restraint enchantments (1.5.15), as enchanted books at every level,
         // last in the tab. Books rather than nothing at all because an
         // enchantment is not an item: the only way to hand one to a creative

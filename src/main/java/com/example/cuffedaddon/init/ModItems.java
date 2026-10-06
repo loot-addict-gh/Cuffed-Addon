@@ -4,6 +4,7 @@ import com.example.cuffedaddon.items.BedRestraintItem;
 import com.example.cuffedaddon.items.BlockLockerItem;
 import com.example.cuffedaddon.items.BundleDuctTapeItem;
 import com.example.cuffedaddon.items.BundleRopeItem;
+import com.example.cuffedaddon.items.KeyNecklaceItem;
 import com.example.cuffedaddon.items.PlayerPickerItem;
 import com.example.cuffedaddon.items.ArrowOfElectrizationItem;
 import com.example.cuffedaddon.items.ArrowOfRestraintItem;
@@ -126,6 +127,22 @@ public class ModItems {
     // given "the one item in your hand" is central to how it's used.
     public static final RegistryObject<Item> SHOCK_COLLAR =
             ITEMS.register("shock_collar", () -> new ShockCollarItem(new Item.Properties().stacksTo(1)));
+
+    // --- Key Necklace (1.6.5) -------------------------------------------
+    // A Handcuffs Key on a rope, worn in a slot of its own. Plain
+    // Item.Properties on purpose: it stacks normally, because unlike the
+    // Shock Collar and the Player Picker it carries NO per-instance NBT that
+    // two of them could disagree on, and the WORN one is kept as a real
+    // ItemStack in the capability rather than as a flag. Not stacksTo(1), not
+    // fireResistant: losing one to lava costs a rope and a key, both
+    // re-craftable, unlike a loaded Player Picker.
+    //
+    // Deliberately NOT an AbstractRestraintKeyItem - see KeyNecklaceItem's own
+    // doc. If it were, holding it would unlock handcuffs directly and the whole
+    // point of having to take the necklace apart in a crafting grid would be
+    // gone.
+    public static final RegistryObject<Item> KEY_NECKLACE =
+            ITEMS.register("key_necklace", () -> new KeyNecklaceItem(new Item.Properties()));
     // --- Reinforced Bow / special arrow line (1.6.0) -----------------------
     //
     // durability(384) is the vanilla bow's exact durability, per [stated]'s

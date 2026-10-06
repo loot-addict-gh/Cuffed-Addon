@@ -2,6 +2,7 @@ package com.example.cuffedaddon.fakeplayer;
 
 import com.example.cuffedaddon.CuffedAddon;
 import com.example.cuffedaddon.init.ModItems;
+import com.example.cuffedaddon.necklace.NecklaceUtil;
 import com.example.cuffedaddon.pose.LiePoseProvider;
 import com.example.cuffedaddon.pose.LiePoseUtil;
 import com.example.cuffedaddon.pose.WallPoseProvider;
@@ -334,6 +335,26 @@ public class FakePlayerEvents {
             return;
         }
 
+        // THEN THE KEY NECKLACE (1.6.5), ahead of the body slots.
+        //
+        // [stated] asked for the necklace to work on a fake player too, as a
+        // cosmetic in its own slot, "with the same apply/remove keys as we set".
+        // Apply is literally the same gesture as for a real player - a plain
+        // right-click with one in hand. REMOVAL is the one deliberate deviation,
+        // and it is the SAME deviation this file already makes one branch below
+        // for keyless restraints: a real player's necklace comes off with
+        // crouch + empty hand, but crouch + anything is Fake Players' customization
+        // menu and must stay theirs (see the crouch yield above, and [stated]'s
+        // instruction behind it). So on a fake player it is a PLAIN empty-handed
+        // right-click, exactly as a Rope or Straitjacket comes off one.
+        //
+        // Ahead of the body slots for the same reason the necklace goes ahead of a
+        // keyless restraint everywhere else: an empty-handed click should lift the
+        // key off their neck before it starts undoing what they are wearing.
+        if (handleNecklace(event, target, stack)) {
+            return;
+        }
+
         boolean emptyHanded = stack.isEmpty();
         if (emptyHanded) {
             // AN EMPTY HAND IS HOW A KEYLESS RESTRAINT COMES OFF - Rope and the
@@ -414,6 +435,54 @@ public class FakePlayerEvents {
         // miss does nothing instead of something surprising.
         event.setCancellationResult(CONSUMED_WITHOUT_SWINGING);
         event.setCanceled(true);
+    }
+
+    /**
+     * The Key Necklace apply and removal, for a fake player. Returns true if this
+     * click was one of those and has been dealt with (and swallowed).
+     *
+     * <p>Shaped exactly like {@link #handleStationary}: decide from state both
+     * sides have, consume on the client as well (the 1.5.3 USE_ITEM fall-through
+     * fix), then do the real work server-side and swallow the click without
+     * swinging.
+     *
+     * <p>The necklace needs no fake-player-specific state of its own - the same
+     * {@code INecklaced} capability is attached to their entity, and
+     * {@code NecklaceUtil} is {@code LivingEntity}-typed throughout. See
+     * {@code NecklaceEvents#onAttachCapabilities} for why that was possible here
+     * when Cuffed's restraints needed a whole parallel representation.
+     */
+    private static boolean handleNecklace(PlayerInteractEvent event, LivingEntity target, ItemStack stack) {
+        boolean applying = stack.is(ModItems.KEY_NECKLACE.get());
+        boolean removing = stack.isEmpty() && NecklaceUtil.isWearing(target);
+        if (!applying && !removing) {
+            return false;
+        }
+        if (applying && NecklaceUtil.isWearing(target)) {
+            // Slot occupied. Swallow it rather than letting a necklace fall
+            // through to their menu or to Item#use - same "a miss does nothing
+            // instead of something surprising" rule as the body-slot dispatch.
+            event.setCancellationResult(CONSUMED_WITHOUT_SWINGING);
+            event.setCanceled(true);
+            return true;
+        }
+
+        if (!(event.getEntity() instanceof ServerPlayer actor)) {
+            event.setCancellationResult(CONSUMED_WITHOUT_SWINGING);
+            event.setCanceled(true);
+            return true;
+        }
+
+        if (applying) {
+            NecklaceUtil.applyNecklace(actor, target, stack);
+        } else {
+            NecklaceUtil.removeNecklace(actor, target);
+        }
+
+        markHandled(actor, target);
+        event.setCancellationResult(CONSUMED_WITHOUT_SWINGING);
+        event.setCanceled(true);
+        return true;
     }
 
     /**

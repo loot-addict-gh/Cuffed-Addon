@@ -1,19 +1,35 @@
 modLoader="javafml"
 loaderVersion="[47,)"
+
+# Cuffed Addon is a derivative work of Cuffed (by LazrProductions), which is
+# licensed under GPL-3.0. This mod includes modified Cuffed code and artwork,
+# so GPL-3.0 carries over to it. The full licence text is in the LICENSE file
+# at the project root and is also packed into the built jar.
 license="GPL-3.0-only"
 
-displayURL="https://github.com/loot-addict-gh/Cuffed-Addon"
-issueTrackerURL="https://github.com/loot-addict-gh/Cuffed-Addon/issues"
+# FILL THESE IN BEFORE THE CURSEFORGE UPLOAD.
+# GPL-3.0 requires the source of a distributed binary to be available, so
+# displayURL should point at a public repository (or a page linking to one).
+# Leave a line commented out rather than setting it to "" - an empty string
+# renders as a dead link on the mod-list screen.
+#displayURL="https://github.com/<you>/cuffedaddon"
+#issueTrackerURL="https://github.com/<you>/cuffedaddon/issues"
 
 [[mixins]]
     config="mixins.cuffedaddon.json"
 
+# Declared here as well as in build.gradle's jar manifest. Forge reads mixin
+# configs from both, and Mixin ignores a config it has already registered, so
+# listing it twice is harmless - while listing it in only the manifest meant a
+# single missing line in a build file silently disabled the whole Fake Players
+# feature with no error anywhere, which is what happened at 1.5.0. The
+# build.gradle MixinConfigs entry can now be removed or left alone; either works.
 [[mixins]]
     config="mixins.cuffedaddon.fakeplayer.json"
 
 [[mods]]
 modId="cuffedaddon"
-version="1.0.0"
+version="1.6.5"
 displayName="Cuffed Addon"
 authors="loot_addict"
 credits='''Built on Cuffed by LazrProductions, used under GPL-3.0 - https://github.com/LazrProductions/cuffed
@@ -50,6 +66,10 @@ description='''Multiple additions to the original mod. Rope, sleep mask, bed res
     ordering="AFTER"
     side="BOTH"
 
+# Fake Players (by duzo) - OPTIONAL, same treatment as Curios. The compat layer
+# identifies their entity by registry id and its one mixin targets them by
+# string, so nothing here is needed at compile time and the mod is a no-op when
+# absent. See the fakeplayer package.
 [[dependencies.cuffedaddon]]
     modId="players"
     mandatory=false

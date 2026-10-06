@@ -1,5 +1,6 @@
 package com.example.cuffedaddon.mixin;
 
+import com.example.cuffedaddon.client.layer.KeyNecklaceLayer;
 import com.example.cuffedaddon.client.layer.LiePoseHandcuffsLayer;
 import com.example.cuffedaddon.client.layer.RopeWrapEntityLayer;
 import com.example.cuffedaddon.client.layer.SafeRestraintEntityLayer;
@@ -100,5 +101,12 @@ public abstract class FakePlayerRendererMixin
         // pillory applied to a fake player's head was invisible. Same class Cuffed
         // uses, so it looks identical.
         this.addLayer(new PilloryEntityLayer<>(this, context.getItemInHandRenderer()));
+
+        // 1.6.5: the Key Necklace. It gates on this addon's own NECKLACED
+        // capability, which is attached to their entity as well as to players, so
+        // it draws nothing on a fake player that is not wearing one. The Shock
+        // Collar's layer is deliberately NOT here - a collar cannot be applied to
+        // a fake player at all, so there would be nothing for it to draw.
+        this.addLayer(new KeyNecklaceLayer<>(this, context));
     }
 }

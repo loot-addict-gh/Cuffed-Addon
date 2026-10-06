@@ -3,6 +3,7 @@ package com.example.cuffedaddon.client;
 import com.example.cuffedaddon.CuffedAddon;
 import com.example.cuffedaddon.client.model.HandcuffsArmsPoseModel;
 import com.example.cuffedaddon.client.model.HandcuffsLegsPoseModel;
+import com.example.cuffedaddon.client.model.KeyNecklaceModel;
 import com.example.cuffedaddon.client.model.RopeArmsWrapModel;
 import com.example.cuffedaddon.client.model.RopeHeadWrapModel;
 import com.example.cuffedaddon.client.model.RopeLegsWrapModel;
@@ -81,6 +82,15 @@ public class ModClientModelLayers {
     public static final ModelLayerLocation SHOCK_COLLAR_LAYER =
             new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CuffedAddon.MODID, "shock_collar_layer"), "main");
 
+    // Key Necklace (1.6.5) - the SAME torso-only geometry as the collar above,
+    // per [stated]'s "same height and texture detail as the shock collar", at
+    // a 0.45f inflate so the two can be worn together without z-fighting. Its
+    // own ModelLayerLocation rather than reusing the collar's because the
+    // inflate differs, which makes it genuinely different geometry - a pure
+    // retexture would have shared one (see the project's texture rules).
+    public static final ModelLayerLocation KEY_NECKLACE_LAYER =
+            new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CuffedAddon.MODID, "key_necklace_layer"), "main");
+
 
     // ------------------------------------------------------- the bake cache
 
@@ -149,6 +159,7 @@ public class ModClientModelLayers {
 
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(SHOCK_COLLAR_LAYER, ShockCollarModel::createBodyLayer);
+        event.registerLayerDefinition(KEY_NECKLACE_LAYER, KeyNecklaceModel::createBodyLayer);
         event.registerLayerDefinition(ROPE_ARMS_WRAP_LAYER,
                 () -> RopeArmsWrapModel.createBodyLayer(false));
         event.registerLayerDefinition(ROPE_ARMS_WRAP_SLIM_LAYER,

@@ -161,5 +161,20 @@ public class NetworkHandler {
                 IllusionLegsSyncPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
+        // Key Necklace (1.6.5). Appended at the END, for the reason spelled out
+        // on the Illusion packet above: ids are handed out by a running id++, so
+        // inserting one anywhere but the end silently renumbers everything after
+        // it. Declared PLAY_TO_CLIENT because its handler calls
+        // Minecraft.getInstance(), a class that does not exist on a dedicated
+        // server - declaring the direction makes the channel refuse it on the
+        // way in rather than throwing NoClassDefFoundError on the server thread.
+        CHANNEL.registerMessage(
+                id++,
+                NecklaceSyncPacket.class,
+                NecklaceSyncPacket::encode,
+                NecklaceSyncPacket::decode,
+                NecklaceSyncPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
     }
 }

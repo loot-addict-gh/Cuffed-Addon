@@ -14,6 +14,7 @@ import com.example.cuffedaddon.init.ModEntityTypes;
 import com.example.cuffedaddon.init.ModItems;
 import com.example.cuffedaddon.init.ModRecipeSerializers;
 import com.example.cuffedaddon.init.ModRestraints;
+import com.example.cuffedaddon.necklace.NecklaceEvents;
 import com.example.cuffedaddon.network.NetworkHandler;
 import com.example.cuffedaddon.picker.PlayerPickerEvents;
 import com.example.cuffedaddon.pose.LiePoseCapabilityEvents;
@@ -59,6 +60,7 @@ public class CuffedAddon {
         modEventBus.addListener(WallPoseCapabilityEvents::registerCapabilities);
         modEventBus.addListener(PlayerPickerEvents::registerCapabilities);
         modEventBus.addListener(ShockCollarEvents::registerCapabilities);
+        modEventBus.addListener(NecklaceEvents::registerCapabilities);
         modEventBus.addListener(FakePlayerEvents::registerCapabilities);
 
         // All server-side config for this addon lives in this ONE

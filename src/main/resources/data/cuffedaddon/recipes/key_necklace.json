@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R",
+    "K"
+  ],
+  "key": {
+    "R": {
+      "item": "cuffedaddon:rope"
+    },
+    "K": {
+      "item": "cuffed:handcuffs_key"
+    }
+  },
+  "result": {
+    "item": "cuffedaddon:key_necklace",
+    "count": 1
+  }
+}

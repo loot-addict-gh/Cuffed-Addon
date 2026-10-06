@@ -641,6 +641,14 @@ public class LiePoseEvents {
         }
 
         if (stack.isEmpty() && actor.isCrouching()) {
+            // KEY NECKLACE FIRST (1.6.5) - see the identical block in
+            // WallPoseEvents for why the check lives inside this branch rather
+            // than being left to NecklaceEvents' own HIGHEST-priority listener.
+            if (com.example.cuffedaddon.necklace.NecklaceUtil.removeNecklace(actor, target)) {
+                event.setCancellationResult(InteractionResult.CONSUME);
+                event.setCanceled(true);
+                return;
+            }
             // Round 19: back to head-only, matching the arm/leg revert
             // above.
             boolean handled = tryUnequipCrouch(targetCap, target, actor, RestraintType.Head);

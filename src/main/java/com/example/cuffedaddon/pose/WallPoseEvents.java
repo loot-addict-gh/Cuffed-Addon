@@ -309,6 +309,21 @@ public class WallPoseEvents {
             return;
         }
 
+        // KEY NECKLACE (1.6.5) - handed over to NecklaceEvents, same carve-out
+        // and for the same reason as the Shock Collar above. The general rule
+        // recorded after the 1.6.3 collar bug is that ANY new item meant to
+        // work on a held player needs one of these, or it silently fails on
+        // wall-restrained targets only (this method blocks every right-click it
+        // does not recognise; LiePoseEvents' equivalent falls through instead,
+        // which is why the bed would have worked and the wall would not).
+        //
+        // Putting a necklace ON a helpless target is very much wanted, and so
+        // is taking one OFF - see the crouch + empty-hand branch below, which
+        // handles the removal side.
+        if (stack.is(com.example.cuffedaddon.init.ModItems.KEY_NECKLACE.get())) {
+            return;
+        }
+
         if (stack.is(com.lazrproductions.cuffed.init.ModItems.HANDCUFFS_KEY.get())) {
             WallPoseUtil.release(target);
             event.setCancellationResult(InteractionResult.SUCCESS);
@@ -372,6 +387,23 @@ public class WallPoseEvents {
         }
 
         if (stack.isEmpty() && actor.isCrouching()) {
+            // KEY NECKLACE FIRST (1.6.5), per [stated]: the necklace takes
+            // priority over any restraint on the same crouch + empty-hand
+            // gesture, so a captor lifts the key off their neck before starting
+            // on anything else. Done HERE rather than left to NecklaceEvents
+            // because both listeners sit at HIGHEST and the order between two
+            // same-priority listeners is registration order - whereas this
+            // branch and NecklaceEvents want the very same click. Checking it
+            // inside the branch makes the ordering deterministic instead.
+            //
+            // (Nothing can double-handle it either way: whichever of the two
+            // runs first cancels the event, and a cancelled event is not
+            // delivered to listeners that did not ask for cancelled ones.)
+            if (com.example.cuffedaddon.necklace.NecklaceUtil.removeNecklace(actor, target)) {
+                event.setCancellationResult(InteractionResult.CONSUME);
+                event.setCanceled(true);
+                return;
+            }
             boolean handled = tryUnequipHeadCrouch(targetCap, target, actor);
             event.setCancellationResult(handled ? InteractionResult.SUCCESS : InteractionResult.FAIL);
             event.setCanceled(true);

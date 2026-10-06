@@ -1,6 +1,7 @@
 package com.example.cuffedaddon.client;
 
 import com.example.cuffedaddon.CuffedAddon;
+import com.example.cuffedaddon.client.layer.KeyNecklaceLayer;
 import com.example.cuffedaddon.client.layer.LiePoseHandcuffsLayer;
 import com.example.cuffedaddon.client.layer.RopeWrapEntityLayer;
 import com.example.cuffedaddon.client.layer.ShockCollarLayer;
@@ -69,6 +70,11 @@ public class ClientModEvents {
                 renderer.addLayer(new LiePoseHandcuffsLayer<>(renderer, event.getContext()));
                 renderer.addLayer(new StraitjacketWrapEntityLayer<>(renderer, event.getContext(), slim));
                 renderer.addLayer(new ShockCollarLayer<>(renderer, event.getContext()));
+                // Key Necklace (1.6.5), added AFTER the collar so that when a
+                // player wears both, the necklace draws second. At 0.45f
+                // against the collar's 0.4f they do not overlap in space, so
+                // this is belt-and-braces rather than load-bearing.
+                renderer.addLayer(new KeyNecklaceLayer<>(renderer, event.getContext()));
             }
         }
 

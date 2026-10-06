@@ -1,6 +1,7 @@
 package com.example.cuffedaddon.capability;
 
 import com.example.cuffedaddon.collar.ICollared;
+import com.example.cuffedaddon.necklace.INecklaced;
 import com.example.cuffedaddon.fakeplayer.IFakeDetained;
 import com.example.cuffedaddon.fakeplayer.IFakeRestrained;
 import com.example.cuffedaddon.picker.IPlayerPicked;
@@ -34,6 +35,13 @@ public class ModCapabilities {
     // fourth to register into. See collar/ICollared for the full write-up,
     // including why this is a custom capability rather than a Curios slot.
     public static final Capability<ICollared> COLLARED =
+            CapabilityManager.get(new CapabilityToken<>() {});
+
+    // Key Necklace (1.6.5) - the addon's own FIFTH worn slot, separate from
+    // COLLARED above so a player can wear a collar and a necklace at once and
+    // neither ending disturbs the other. See necklace/INecklaced for why it is
+    // a slot of its own and why it is deliberately NOT a restraint.
+    public static final Capability<INecklaced> NECKLACED =
             CapabilityManager.get(new CapabilityToken<>() {});
 
     // Fake Players compatibility (1.5.0) - restraint state for one of that mod's
